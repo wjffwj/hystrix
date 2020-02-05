@@ -1,0 +1,27 @@
+server:
+  port: 8200
+spring:
+  application:
+    name: user
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8000/eureka
+feign:
+  hystrix:
+    enabled: true
+
+#hystrix全局配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+#针对指定方法进行配置
+    RealFeignActivityService#firstLoginActivity(Long):
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 2
